@@ -19,15 +19,21 @@ class PostImagesController < ApplicationController
   # 投稿画像のリストを表示する画面を作る
   def index
     # ３章で追加
-    @post_images = PostImage.all
+    # @post_images = PostImage.all
     
+    # ４章で上記を下記に変更。ページャの実装
+    @post_images = PostImage.page(params[:page]).reverse_order
+
   end
 
   # 投稿画像の詳細を表示する画面を作る
   def show
     # ３章で追加
     @post_image = PostImage.find(params[:id])
-    
+
+    #4章で追加。コメントの表示
+    @post_comment = PostComment.new
+
   end
 
   # 投稿画像を削除する
@@ -40,11 +46,10 @@ class PostImagesController < ApplicationController
 
    # ３章で追加。投稿データのストロングパラメータ
   private
-  
+
   # フォームで入力されたデータが投稿データとして許可されているパラメータかどうかをチェック。
   def post_image_params
     params.require(:post_image).permit(:shop_name, :image, :caption)
   end
 
 end
-

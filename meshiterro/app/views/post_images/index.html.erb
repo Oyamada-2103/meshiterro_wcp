@@ -26,5 +26,11 @@
     <p>ユーザーネーム：<%= post_image.user.name %></p>
     <!--post_image変数のuser_idに関連付けられているuserモデルのnameカラムを表示
       同様にこのカラムも、post_imageモデルに定義-->
+  
+    <!--４章で追加。コメントの表示-->
+    
   </div>
 <% end %>
+
+<!--４章で追加ページャの実装-->
+<%= paginate @post_images %>

@@ -7,4 +7,16 @@ class PostImage < ApplicationRecord
   # refileを使用するうえでのルール
   attachment :image  # ここを追加（_idは含めません）
   
+  
+  # ４章で追加。コメントモデルと紐付け
+  # 複数のコメントモデルを持つ
+  has_many :post_comments, dependent: :destroy
+  
+  # 4章で追加。フェイバリットモデルと紐付け
+  has_many :favorites, dependent: :destroy
+  def favorited_by?(user)
+    favorites.where(user_id: user.id).exists?
+  end
+  
+  
 end
