@@ -1,0 +1,30 @@
+<!--3章で追加　app/views/post_imagesフォルダ内のindex.html.erbファイル-->
+
+<% @post_images.each do |post_image| %>
+<!--コントローラから渡された@post_images変数内から1つずつ取り出して
+    post_image変数へ格納-->
+  <div>
+    <%= link_to post_image_path(post_image.id) do %>
+    <!--3章終盤で追記
+        link_toでは、doからendの間が、aタグで囲まれた状態になります。
+        結果、attachment_image_tagは、aタグに囲まれたimgタグになります。-->
+
+      <%= attachment_image_tag post_image, :image %>
+      <!--refile側が用意したヘルパーで、imgタグを作成
+          post_image変数のimage_idに保存された画像のimgタグを生成-->
+    <% end %>
+    
+    <p>投稿ユーザー画像：<%= image_tag('sample-author1.jpg') %></p>
+    <p>ショップ名：<%= post_image.shop_name %></p>
+    <!--post_image変数のshop_nameカラムを表示します。
+        このカラムは、post_imageモデルに定義されています。-->
+    
+    <p>説明：<%= post_image.caption %></p>
+    <!--post_image変数のcaptionカラムを表示します。
+        このカラムも、post_imageモデルに定義-->
+    
+    <p>ユーザーネーム：<%= post_image.user.name %></p>
+    <!--post_image変数のuser_idに関連付けられているuserモデルのnameカラムを表示
+      同様にこのカラムも、post_imageモデルに定義-->
+  </div>
+<% end %>
