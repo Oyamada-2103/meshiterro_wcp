@@ -1,0 +1,42 @@
+<h2>Sign up</h2>
+
+<%= form_with model: @user, url: user_registration_path, id: 'new_user', class: 'new_user', local: true do |f| %>
+<!--カッコ内を右記（初期生成）から変更２章 form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|-->
+  
+  <%= render "devise/shared/error_messages", resource: resource %>
+  
+  <!--2章加筆-->
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, autofocus: true %>
+  </div>
+  
+  <!--初期生成-->
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <!--初期生成-->
+  <div class="field">
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+  </div>
+
+  <!--初期生成-->
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <!--初期生成-->
+  <div class="actions">
+    <%= f.submit "Sign up" %>
+  </div>
+
+<% end %>
+
+<%= render "devise/shared/links" %>
