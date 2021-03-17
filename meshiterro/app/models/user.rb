@@ -17,4 +17,8 @@ has_many :post_comments, dependent: :destroy
 # ４章でいいね機能
 has_many :favorites, dependent: :destroy
 
+# 5章で追加。プロフィール画像の設定機能を作成
+# refileを使って画像投稿ができるようにする
+attachment :profile_image
+
 end

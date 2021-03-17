@@ -24,6 +24,12 @@
       <li>
         <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
       </li>
+      
+      <!--５章で追加-->
+      <li>
+        <%= link_to 'マイページ', user_path(current_user.id) %>
+      </li>
+      
     <% else %>
     <!--ログインしていなければfalse。 else ~ end表示-->
       <li>

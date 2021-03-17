@@ -1,3 +1,27 @@
+<!--５章で追加-->
+<div class="profile-container">
+  <h3 class="profile-name"><%= @user.name %></h3>
+  
+  <!--5章でカッコ内を右記から下記へ image_tag('sample-author1.jpg') 
+      プロフィール画像を出せるようにした
+      attachment_image_tag 保存先インスタンス名, :保存先カラム名, :サイズ（横幅,高さ）, 画像拡張子, 代替画像-->
+  <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+
+</div>
+
+<!--5章で追加。編集ページへのリンク-->
+<% if @user.id == current_user.id %>
+  <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
+<% end %>
+
+
+<!--<h1>Users#show</h1>-->
+<!--<p>Find me in app/views/users/show.html.erb</p>-->
+<!--５章。下記に置き換えのため初期生成は削除-->
+<!--app/views/post_imagesフォルダ内のindex.html.erbファイルのコピー-->
+
+
+
 <!--3章で追加　app/views/post_imagesフォルダ内のindex.html.erbファイル-->
 
 <% @post_images.each do |post_image| %>
@@ -14,8 +38,7 @@
           post_image変数のimage_idに保存された画像のimgタグを生成-->
     <% end %>
     
-    <!--５章で右記から下記へ変更 image_tag('sample-author1.jpg') %></p>
-        プロフィール画像の反映-->
+    <!-- ５章でカッコ内を右記から下記へ変更image_tag('sample-author1.jpg')-->
     <p>投稿ユーザー画像：<%= attachment_image_tag post_image.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %></p>
     <p>ショップ名：<%= post_image.shop_name %></p>
     <!--post_image変数のshop_nameカラムを表示します。

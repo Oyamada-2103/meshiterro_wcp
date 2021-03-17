@@ -16,8 +16,8 @@
       もし、投稿者 == 現在ログインしているユーザ だったら
       削除ボタン
       終わり-->
-      
-      
+
+
   <!--4章いいね機能の追加-->
     <% if @post_image.favorited_by?(current_user) %>
       <p>
@@ -38,7 +38,11 @@
 <div class="comments">
   <p>コメント件数：<%= @post_image.post_comments.count %></p>
   <% @post_image.post_comments.each do |post_comment| %>
-    <p><%= image_tag('sample-author1.jpg') %></p>
+
+    <!--５章で右記から下記へ変更 image_tag('sample-author1.jpg') %></p>
+        プロフィール画像の反映-->
+    <p><%= attachment_image_tag post_comment.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %></p>
+
     <%= post_comment.user.name %>
     <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
 
@@ -48,9 +52,9 @@
       <%= link_to "削除", post_image_post_comment_path(post_comment.post_image, post_comment), method: :delete %>
     </div>
     <% end %>
-    
-    
-    
+
+
+
   <% end %>
 </div>
 
