@@ -9,6 +9,14 @@
 
 </div>
 
+
+<%= render 'post_images/list', post_images: @post_images %>
+<!-- render [部分テンプレートファイルの指定], [ローカル変数]:[渡す値] -->
+<!--７章で部分テンプレート利用
+_list.html.erbで内容確認-->
+
+
+
 <!--5章で追加。編集ページへのリンク-->
 <% if @user.id == current_user.id %>
   <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
@@ -19,43 +27,3 @@
 <!--<p>Find me in app/views/users/show.html.erb</p>-->
 <!--５章。下記に置き換えのため初期生成は削除-->
 <!--app/views/post_imagesフォルダ内のindex.html.erbファイルのコピー-->
-
-
-
-<!--3章で追加　app/views/post_imagesフォルダ内のindex.html.erbファイル-->
-
-<% @post_images.each do |post_image| %>
-<!--コントローラから渡された@post_images変数内から1つずつ取り出して
-    post_image変数へ格納-->
-  <div>
-    <%= link_to post_image_path(post_image.id) do %>
-    <!--3章終盤で追記
-        link_toでは、doからendの間が、aタグで囲まれた状態になります。
-        結果、attachment_image_tagは、aタグに囲まれたimgタグになります。-->
-
-      <%= attachment_image_tag post_image, :image %>
-      <!--refile側が用意したヘルパーで、imgタグを作成
-          post_image変数のimage_idに保存された画像のimgタグを生成-->
-    <% end %>
-    
-    <!-- ５章でカッコ内を右記から下記へ変更image_tag('sample-author1.jpg')-->
-    <p>投稿ユーザー画像：<%= attachment_image_tag post_image.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %></p>
-    <p>ショップ名：<%= post_image.shop_name %></p>
-    <!--post_image変数のshop_nameカラムを表示します。
-        このカラムは、post_imageモデルに定義されています。-->
-    
-    <p>説明：<%= post_image.caption %></p>
-    <!--post_image変数のcaptionカラムを表示します。
-        このカラムも、post_imageモデルに定義-->
-    
-    <p>ユーザーネーム：<%= post_image.user.name %></p>
-    <!--post_image変数のuser_idに関連付けられているuserモデルのnameカラムを表示
-      同様にこのカラムも、post_imageモデルに定義-->
-  
-    <!--４章で追加。コメントの表示-->
-    
-  </div>
-<% end %>
-
-<!--４章で追加ページャの実装-->
-<%= paginate @post_images %>

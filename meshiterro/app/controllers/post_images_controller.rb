@@ -12,8 +12,17 @@ class PostImagesController < ApplicationController
     # ３章で追加
     @post_image = PostImage.new(post_image_params)
     @post_image.user_id = current_user.id
-    @post_image.save
-    redirect_to post_images_path
+   
+    #6章でif文に変更 
+    if @post_image.save
+      redirect_to post_images_path
+    else
+      render :new
+      # render :アクション名（.html.erb）アクションを実行しているわけではない
+      # 同じコントローラ内の別アクションのViewを表示できます。
+      # コントローラー名を指定して他のviewの表示も可
+    end
+    
   end
 
   # 投稿画像のリストを表示する画面を作る

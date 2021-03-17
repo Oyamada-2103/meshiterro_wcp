@@ -1,6 +1,20 @@
 <!--３章で追加 post_imagesのnew.html.erb-->
 
 <h1>画像投稿フォーム</h1>
+
+<!--６章で追加。エラー時のメッセージ-->
+<% if @post_image.errors.any? %>
+  <%= @post_image.errors.count %>件のエラーが発生しました
+  <% @post_image.errors.full_messages.each do |message| %>
+    <%= message %>
+  <% end %>
+<% end %>
+<!--errorsは、モデルにバリデーションをかけたときに、発生したエラーの内容を確認できるメソッドです。-->
+<!--any?と組み合わせることで、エラーが発生しているかどうかを判定できます。-->
+<!--また、full_messageと組み合わせることで、エラーの内容を出力できます。-->
+<!--エラー文は配列で保存されているため、eachを使います。-->
+
+
 <%= form_with model: @post_image, local:true do |f| %>
   <h4>画像</h4>
   <%= f.attachment_field :image %>
